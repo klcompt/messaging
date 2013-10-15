@@ -36,4 +36,26 @@ describe MessagesController do
       end
     end
   end
+
+  describe '#index' do
+    let(:messages) { double 'messages' }
+
+    before do 
+      Message.stub(:order) { messages }
+      subject.stub(render: nil)
+    end
+
+    it 'retrieves all ordered messages' do
+      Message.should_receive(:order).with('title ASC')
+
+      subject.index
+    end
+
+    it 'should render correct data' do
+      subject.should_receive(:render).with(status: 200, json: messages)
+
+      subject.index
+    end
+
+  end
 end
