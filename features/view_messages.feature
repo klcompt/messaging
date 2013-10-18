@@ -3,6 +3,7 @@ Feature: Display the list of messages
   As an administrator
   I want to see a list of all messages
 
+  @javascript
   Scenario: Display list of messages
     Given some messages have been created
     When I visit the application 

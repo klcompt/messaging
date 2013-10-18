@@ -1,19 +1,10 @@
-hello world
+%h1 Messages 
 
-%table.messages
-  %tr
-    %td
-      Msg1
-    %td
-      body contents1
-  %tr
-    %td
-      Msg2
-    %td
-      body contents2
-  %tr
-    %td
-      Msg3
-    %td
-      body contents3
-
+%div(ng-app='messagesApp' ng-controller='MessageListController')
+  .ng-cloak(ng-init="init()")
+    %table.messages
+      %tr(ng-repeat='message in messages')
+        %td
+          {{ message.title }}
+        %td
+          {{ message.body }}

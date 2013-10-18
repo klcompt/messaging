@@ -5,7 +5,7 @@ Given(/^some messages have been created$/) do
 end
 
 When(/^I visit the application$/) do
-  visit root_url 
+  visit root_path 
 end
 
 Then(/^I should see the messages$/) do
