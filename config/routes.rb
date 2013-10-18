@@ -55,4 +55,6 @@ Messaging::Application.routes.draw do
   #   end
 
   resources :messages, defaults: {format: :json}
+
+  root :to => "home#index"
 end
