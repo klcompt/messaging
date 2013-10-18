@@ -5,7 +5,23 @@ Given(/^some messages have been created$/) do
 end
 
 When(/^I visit the application$/) do
-  visit root_path 
+  visit root_path
+end
+
+When(/^I create a new message$/) do
+  @new_message_title = 'NewlyCreatedTitle'
+  @new_message_body = 'Newly created message body.'
+  within '#new_message' do
+    fill_in 'messageTitle', with: @new_message_title
+    fill_in 'messageBody', with: @new_message_body
+    click_button('create')
+  end
+end
+
+Then(/^I should see the new message as the last message in the list$/) do
+  last_row = page.all('table.messages tr').last
+  last_row.should have_content @new_message_title
+  last_row.should have_content @new_message_body
 end
 
 Then(/^I should see the messages$/) do

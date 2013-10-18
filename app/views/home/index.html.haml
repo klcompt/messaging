@@ -8,3 +8,12 @@
           {{ message.title }}
         %td
           {{ message.body }}
+    %br
+    %form#new_message(ng-submit="createMessage(messageTitle, messageBody)")
+      .input-group
+        %input.messageTitle.form-control.input-lg( name="messageTitle" type="text" autofocus="autofocus" placeholder="Message title" maxlength="255" ng-model="messageTitle" data-non-blank )
+      .input-group
+        %textarea.messageBody.form-control.input-lg( name="messageBody" cols="80" rows="5" placeholder="Message body" maxlength="3500" ng-model="messageBody" data-non-blank )
+      .input-group
+        %span.input-group-btn
+          %button.btn.btn-primary.btn-lg(type="submit") create
