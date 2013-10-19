@@ -100,4 +100,48 @@ describe MessagesController do
       end
     end
   end
+
+  describe '#update' do
+    let(:param_hash) { { rescended: true } }
+    let(:message_id) { 1 }
+    let(:params) { { id: message_id } }
+
+    before do
+      params.stub_chain(:require, :permit) { param_hash }
+      Message.stub(:find).with(message_id) { message }
+      subject.stub(params: params, render: nil)
+    end
+
+    context 'updates successfully' do
+      let(:message) { double('message', update_attributes: true) }
+
+      it 'calls update_attributes with correct params' do
+        message.should_receive(:update_attributes).with(param_hash)
+
+        subject.update
+      end
+
+      it 'responds with 204' do
+        subject.should_receive(:render).with(status: 204, nothing: true)
+
+        subject.update
+      end
+    end
+
+    context 'validation errors' do
+      let(:message_errors_full_messages) { double 'message errors full messages' }
+      let(:message) { double('message', update_attributes: false) }
+
+      before do
+        message.stub_chain(:errors, :full_messages) { message_errors_full_messages }
+      end
+
+      it 'responds with 422' do
+        subject.should_receive(:render).with(status: 422, json: { errors: message_errors_full_messages })
+
+        subject.update
+      end
+    end
+
+  end
 end

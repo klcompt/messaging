@@ -78,4 +78,43 @@ describe 'Messages' do
       end
     end
   end
+
+  describe 'PUT #update - rescend message' do
+    let!(:message) { FactoryGirl.create(:message) }
+    let(:params) { { message: { rescended: true } } }
+
+    context 'message exists' do
+      before { put message_path(message, format: :json), params }
+
+      it 'responds with 204' do
+        response.status.should == 204
+      end
+
+      it 'updates the message rescended flag' do
+        message_after_update = Message.find(message.id)
+        message_after_update.should be_rescended
+      end
+    end
+
+    context 'validation errors' do
+      let(:params) { { message: { title: nil, rescended: true } } }
+      before { put message_path(message, format: :json), params }
+
+      it 'responds with 422' do
+        response.status.should == 422
+      end
+
+      it 'returns validation errors' do
+        parsed_json_response['errors'].should == ["Title can't be blank"]
+      end
+    end
+
+    context 'message not found' do
+      before { put message_path(-1, format: :json), params }
+
+      it 'responds with 404' do
+        response.status.should == 404
+      end
+    end
+  end
 end

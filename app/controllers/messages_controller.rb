@@ -20,10 +20,23 @@ class MessagesController < ApplicationController
     end
   end
 
+  def update
+    message = Message.find(message_id)
+    if message.update_attributes(message_params)
+      render status: 204, nothing: true
+    else
+      render status: 422, json: { errors: message.errors.full_messages }
+    end
+  end
+
   private
 
+  def message_id
+    params[:id]
+  end
+
   def message_params
-    params.require(:message).permit(:title, :body)
+    params.require(:message).permit(:title, :body, :rescended)
   end
 
   def render_404

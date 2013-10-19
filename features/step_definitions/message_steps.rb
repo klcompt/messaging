@@ -34,4 +34,3 @@ Then(/^I should see the messages$/) do
     page.should have_content @message3.body
   end
 end
-
