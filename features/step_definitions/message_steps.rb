@@ -18,6 +18,16 @@ When(/^I create a new message$/) do
   end
 end
 
+When(/^I rescend the last message$/) do
+  last_row = page.all('table.messages tbody tr').last
+  last_row.click_button('rescend')
+end
+
+Then(/^I should see the messages is rescended$/) do
+  last_row = page.all('table.messages tbody tr').last
+  last_row.should have_content "TRUE"
+end
+
 Then(/^I should see the new message as the last message in the list$/) do
   last_row = page.all('table.messages tbody tr').last
   last_row.should have_content @new_message_title

@@ -9,3 +9,7 @@ angular.module('messagesApp').controller 'MessageListController', ($scope, Messa
       $scope.messageTitle = ""
       $scope.messageBody = ""
       $scope.messages.push(message)
+
+  $scope.rescendMessage = (message) ->
+    @messageService.rescend message.id, ->
+      message.rescended = true

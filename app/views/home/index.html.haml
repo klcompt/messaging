@@ -8,6 +8,7 @@
           %td Title
           %td Body
           %td Rescended?
+          %td
       %tbody
         %tr(ng-repeat='message in messages')
           %td
@@ -16,6 +17,10 @@
             {{ message.body }}
           %td
             {{ "" + message.rescended | uppercase }}
+          %td
+            %button.btn(ng-if="!message.rescended" ng-click="rescendMessage(message)")
+              rescend
+
     %br
     %form#new_message(ng-submit="createMessage(messageTitle, messageBody)")
       .input-group
