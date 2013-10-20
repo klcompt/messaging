@@ -2,18 +2,18 @@
 
 %div(ng-app='messagesApp' ng-controller='MessageListController')
   .ng-cloak(ng-init="init()")
-    %table.messages
+    %table.messages.table.table-bordered.table-condensed
       %thead
         %tr
-          %td Title
-          %td Body
-          %td Rescended?
-          %td
-      %tbody
+          %th Title
+          %th Body
+          %th Rescended?
+          %th
+      %tbody.table-striped
         %tr(ng-repeat='message in messages')
-          %td
+          %td.span-2
             {{ message.title }}
-          %td
+          %td.span-3
             {{ message.body }}
           %td
             {{ "" + message.rescended | uppercase }}
@@ -22,11 +22,11 @@
               rescend
 
     %br
-    %form#new_message(ng-submit="createMessage(messageTitle, messageBody)")
-      .input-group
+    %form.form-horizontal#new_message(ng-submit="createMessage(messageTitle, messageBody)")
+      .form-group
         %input.messageTitle.form-control.input-lg( name="messageTitle" type="text" autofocus="autofocus" placeholder="Message title" maxlength="255" ng-model="messageTitle" data-non-blank )
-      .input-group
+      .form-group
         %textarea.messageBody.form-control.input-lg( name="messageBody" cols="80" rows="5" placeholder="Message body" maxlength="3500" ng-model="messageBody" data-non-blank )
-      .input-group
+      .form-group
         %span.input-group-btn
           %button.btn.btn-primary.btn-lg(type="submit") create
