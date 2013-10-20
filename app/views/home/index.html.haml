@@ -5,12 +5,15 @@
     %table.messages.table.table-bordered.table-condensed
       %thead
         %tr
+          %th MessageId
           %th Title
           %th Body
           %th Rescended?
           %th
       %tbody.table-striped
         %tr(ng-repeat='message in messages')
+          %td
+            {{ message.id }}
           %td.span-2
             {{ message.title }}
           %td.span-3
