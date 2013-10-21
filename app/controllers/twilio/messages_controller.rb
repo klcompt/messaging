@@ -5,6 +5,5 @@ class Twilio::MessagesController < ApplicationController
 
   def retrieve
     logger.error "Retrieve called with#{ params.inspect}"
-    render nothing: true
   end
 end
