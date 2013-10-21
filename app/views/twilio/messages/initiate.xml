@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+<Gather action="handle-user-input.php" numDigits="1">
+  <Say>Welcome to The Messaging Center.</Say>
+<Say>Please enter your message id now.</Say>
+</Gather>
+<!-- If customer doesn't input anything, prompt and try again. -->
+<Say>Sorry, I didn't get your response.</Say>
+<Redirect>retrieve.xml</Redirect>
+</Response>
