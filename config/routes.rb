@@ -58,6 +58,7 @@ Messaging::Application.routes.draw do
 
   namespace :twilio do
     get 'messages/initiate' => 'messages#initiate', defaults: {format: :xml}
+    get 'messages/retrieve' => 'messages#retrieve', defaults: {format: :xml}
   end
 
   root :to => "home#index"
