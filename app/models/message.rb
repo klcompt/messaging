@@ -3,5 +3,5 @@ class Message < ActiveRecord::Base
   validates :body, presence: true
 
 
-  scope :active, where(rescended: false)
+  scope :active, -> { where(rescended: false) }
 end
