@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Response>
-<Gather action="http://warm-oasis-2175.herokuapp.com/twilio/messages/retrieve" numDigits="1">
-  <Say>Welcome to The Messaging Center.</Say>
-<Say>Please enter your message id now.</Say>
-</Gather>
-<!-- If customer doesn't input anything, prompt and try again. -->
-<Say>Sorry, I didn't get your response.</Say>
-<Redirect>http://warm-oasis-2175.herokuapp.com/twilio/messages/initiate</Redirect>
+  <Gather action="http://warm-oasis-2175.herokuapp.com/twilio/messages/retrieve" numDigits="5">
+    <Say>Welcome to The Messaging Center.</Say>
+    <Say>Please enter your message id and then press pound.</Say>
+  </Gather>
+  <!-- If customer doesn't input anything, prompt and try again. -->
+  <Say>Sorry, I didn't get your response.</Say>
+  <Pause/>
+  <Redirect>http://warm-oasis-2175.herokuapp.com/twilio/messages/initiate</Redirect>
 </Response>

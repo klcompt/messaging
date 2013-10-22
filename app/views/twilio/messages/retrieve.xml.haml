@@ -1,0 +1,11 @@
+!!! XML
+%Response
+  - if @message
+    %Say
+      = "Message text is, #{@message.body}."
+    %Pause
+  - else
+    %Say
+      = "Your request was received, however, message id #{@message_id} was not found."
+  %Redirect
+    http://warm-oasis-2175.herokuapp.com/twilio/messages/initiate

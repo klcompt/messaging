@@ -2,10 +2,18 @@ class Twilio::MessagesController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def initiate
-    logger.error "initiate called with#{ params.inspect}"
   end
 
   def retrieve
-    logger.error "Retrieve called with#{ params.inspect}"
+    @message_id = message_id
+    @message = Message.active.where(id: message_id).first
+  end
+
+  private
+
+  def message_id
+    params['Digits']
   end
 end
+
+
