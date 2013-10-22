@@ -2,7 +2,7 @@
 
 %div(ng-app='messagesApp' ng-controller='MessageListController')
   .ng-cloak(ng-init="init()")
-    %table.messages.table.table-bordered.table-condensed
+    %table.messages.table.table-bordered.table-condensed.table-hover
       %thead
         %tr
           %th MessageId
@@ -11,7 +11,7 @@
           %th Rescended?
           %th
       %tbody.table-striped
-        %tr(ng-repeat='message in messages')
+        %tr(ng-repeat='message in messages' title='To Play: call twilio number and press {{ message.id }}# when prompted.')
           %td
             {{ message.id }}
           %td.span-2
