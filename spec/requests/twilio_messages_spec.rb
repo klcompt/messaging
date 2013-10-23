@@ -11,18 +11,23 @@ describe 'Messages' do
     end
   end
 
-  describe 'POST #initiate' do
+  describe 'POST #retrieve' do
 
     before { post twilio_messages_retrieve_path(format: :xml), params }
 
     context 'Active Message ID provided' do
       let!(:message) { FactoryGirl.create :message, body: 'TESTING BODY' }
-      let(:params) { { 'Digits' => message.id } }
+      let(:params) { { 'Digits' => message.id, 'From' => "123-456-7890" } }
 
       it 'responds with correct xml' do
-        post twilio_messages_retrieve_path(format: :xml), params
-
         response.body.should == "<?xml version='1.0' encoding='utf-8' ?>\n<Response>\n<Say>\nMessage text is, TESTING BODY.\n</Say>\n<Pause></Pause>\n<Redirect>\nhttp://warm-oasis-2175.herokuapp.com/twilio/messages/initiate\n</Redirect>\n</Response>\n"
+      end
+
+      it 'adds a MessageLog entry for message' do
+        message_logs = Message.find(message.id).message_logs
+
+        message_logs.count.should == 1
+        message_logs.first.from.should == params['From']
       end
     end
 
