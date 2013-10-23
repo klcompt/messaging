@@ -32,11 +32,16 @@ describe 'Messages' do
   describe 'GET #index' do
 
     context 'messages exist' do
-      let!(:message1) { FactoryGirl.create(:message, title: 'Message 1', body: 'msg body 1') }
+      let!(:message1) { FactoryGirl.create(:message, title: 'Message 1', body: 'msg body 1', rescended: true) }
       let!(:message2) { FactoryGirl.create(:message, title: 'Message 2', body: 'msg body 2') }
       let!(:message3) { FactoryGirl.create(:message, title: 'Message 3', body: 'msg body 3') }
 
-      before { get messages_path(format: :json) }
+      before do
+        message2.message_logs.create
+        message2.message_logs.create
+
+        get messages_path(format: :json)
+      end
 
       it 'responds with 200' do
         response.status.should == 200
@@ -46,10 +51,16 @@ describe 'Messages' do
         parsed_json_response.size.should == 3
         parsed_json_response[0]['title'].should == message1.title
         parsed_json_response[0]['body'].should == message1.body
+        parsed_json_response[0]['rescended'].should == message1.rescended
+        parsed_json_response[0]['call_count'].should == 0
         parsed_json_response[1]['title'].should == message2.title
         parsed_json_response[1]['body'].should == message2.body
+        parsed_json_response[1]['rescended'].should == message2.rescended
+        parsed_json_response[1]['call_count'].should == 2
         parsed_json_response[2]['title'].should == message3.title
         parsed_json_response[2]['body'].should == message3.body
+        parsed_json_response[2]['rescended'].should == message3.rescended
+        parsed_json_response[2]['call_count'].should == 0
       end
     end
   end
@@ -115,6 +126,25 @@ describe 'Messages' do
       it 'responds with 404' do
         response.status.should == 404
       end
+    end
+  end
+
+  describe 'GET #show' do
+    let!(:message) { FactoryGirl.create(:message) }
+    let!(:message_log) { FactoryGirl.create(:message_log, message_id: message.id, from: '314-444-5555', called_at: 1.day.ago) }
+    let(:params) { { id: message.id } }
+
+    before { get message_path(message, format: :json) }
+
+    it 'responds with 200' do
+      response.status.should == 200
+    end
+
+    it 'returns json for message and its analytics' do
+      parsed_json_response['title'].should == message.title
+      parsed_json_response['body'].should == message.body
+      parsed_json_response['rescended'].should == message.rescended
+      parsed_json_response['call_count'].should == 1 
     end
   end
 end

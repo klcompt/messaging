@@ -8,6 +8,7 @@
           %th MessageId
           %th Title
           %th Body
+          %th Call Count
           %th Rescended?
           %th
       %tbody.table-striped
@@ -18,6 +19,8 @@
             {{ message.title }}
           %td.span-3
             {{ message.body }}
+          %td
+            {{ message.call_count }}
           %td
             {{ "" + message.rescended | uppercase }}
           %td

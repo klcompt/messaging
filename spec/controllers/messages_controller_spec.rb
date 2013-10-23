@@ -46,7 +46,7 @@ describe MessagesController do
     end
 
     it 'retrieves all ordered messages' do
-      Message.should_receive(:order).with('title ASC')
+      Message.should_receive(:order).with('id ASC')
 
       subject.index
     end

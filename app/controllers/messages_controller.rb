@@ -2,7 +2,7 @@ class MessagesController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, :with => :render_404
 
   def index
-    messages = Message.order('title ASC')
+    messages = Message.order('id ASC')
     render status: 200, json: messages
   end
 

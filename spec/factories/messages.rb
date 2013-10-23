@@ -6,4 +6,10 @@ FactoryGirl.define do
     body "Hello World!"
     rescended false
   end
+
+  factory :message_log do
+    message_id 1
+    from "314-867-5309"
+    called_at 1.day.ago 
+  end
 end

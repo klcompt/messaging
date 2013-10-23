@@ -23,7 +23,7 @@ When(/^I rescend the last message$/) do
   last_row.click_button('rescend')
 end
 
-Then(/^I should see the messages is rescended$/) do
+Then(/^I should see the message is rescended$/) do
   last_row = page.all('table.messages tbody tr').last
   last_row.should have_content "TRUE"
 end
@@ -40,12 +40,15 @@ Then(/^I should see the messages$/) do
     message_rows = page.all('table.messages tbody tr')
     message_rows[0].should have_content @message1.title
     message_rows[0].should have_content @message1.body
+    message_rows[0].should have_content "0"
     message_rows[0].should have_content "TRUE"
     message_rows[1].should have_content @message2.title
     message_rows[1].should have_content @message2.body
+    message_rows[1].should have_content "0"
     message_rows[1].should have_content "FALSE"
     message_rows[2].should have_content @message3.title
     message_rows[2].should have_content @message3.body
+    message_rows[2].should have_content "0"
     message_rows[2].should have_content "FALSE"
   end
 end

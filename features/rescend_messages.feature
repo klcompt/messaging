@@ -8,4 +8,4 @@ Feature: Rescend a message
     Given some messages have been created
     When I visit the application
     And I rescend the last message
-    Then I should see the messages is rescended
+    Then I should see the message is rescended
