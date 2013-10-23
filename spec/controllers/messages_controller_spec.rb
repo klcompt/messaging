@@ -102,7 +102,7 @@ describe MessagesController do
   end
 
   describe '#update' do
-    let(:param_hash) { { rescended: true } }
+    let(:param_hash) { { rescinded: true } }
     let(:message_id) { 1 }
     let(:params) { { id: message_id } }
 

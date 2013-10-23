@@ -36,7 +36,7 @@ class MessagesController < ApplicationController
   end
 
   def message_params
-    params.require(:message).permit(:title, :body, :rescended)
+    params.require(:message).permit(:title, :body, :rescinded)
   end
 
   def render_404

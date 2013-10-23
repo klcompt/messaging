@@ -31,8 +31,8 @@ describe 'Messages' do
       end
     end
 
-    context 'Rescended Message ID provided' do
-      let!(:message) { FactoryGirl.create :message, body: 'TESTING BODY', rescended: true }
+    context 'Rescinded Message ID provided' do
+      let!(:message) { FactoryGirl.create :message, body: 'TESTING BODY', rescinded: true }
       let(:params) { { 'Digits' => message.id } }
 
       it 'responds with correct xml' do

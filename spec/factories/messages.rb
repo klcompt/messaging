@@ -4,7 +4,7 @@ FactoryGirl.define do
   factory :message do
     title "Introduction message"
     body "Hello World!"
-    rescended false
+    rescinded false
   end
 
   factory :message_log do

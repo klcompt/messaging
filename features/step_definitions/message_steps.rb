@@ -1,5 +1,5 @@
 Given(/^some messages have been created$/) do
-  @message1 = FactoryGirl.create(:message, title: 'Msg1', body: 'body contents1', rescended: true)
+  @message1 = FactoryGirl.create(:message, title: 'Msg1', body: 'body contents1', rescinded: true)
   @message2 = FactoryGirl.create(:message, title: 'Msg2', body: 'body contents2')
   @message3 = FactoryGirl.create(:message, title: 'Msg3', body: 'body contents3')
 end
@@ -18,12 +18,12 @@ When(/^I create a new message$/) do
   end
 end
 
-When(/^I rescend the last message$/) do
+When(/^I rescind the last message$/) do
   last_row = page.all('table.messages tbody tr').last
-  last_row.click_button('rescend')
+  last_row.click_button('rescind')
 end
 
-Then(/^I should see the message is rescended$/) do
+Then(/^I should see the message is rescinded$/) do
   last_row = page.all('table.messages tbody tr').last
   last_row.should have_content "TRUE"
 end

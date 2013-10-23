@@ -4,9 +4,9 @@ class Message < ActiveRecord::Base
 
   has_many :message_logs
 
-  scope :active, -> { where(rescended: false) }
+  scope :active, -> { where(rescinded: false) }
 
   def as_json(*args)
-    super.merge({call_count: message_logs.count})
+    super.merge( { 'call_count' => message_logs.count } )
   end
 end

@@ -7,9 +7,9 @@ describe Message do
 
   describe '#active scope' do
     let!(:active_message1) { FactoryGirl.create :message }
-    let!(:rescended_message1) { FactoryGirl.create :message, rescended: true }
+    let!(:rescinded_message1) { FactoryGirl.create :message, rescinded: true }
     let!(:active_message2) { FactoryGirl.create :message }
-    let!(:rescended_message2) { FactoryGirl.create :message, rescended: true }
+    let!(:rescinded_message2) { FactoryGirl.create :message, rescinded: true }
     let!(:active_message3) { FactoryGirl.create :message }
 
     it 'has 5 total messages' do
@@ -37,8 +37,8 @@ describe Message do
         "body" => message.body,
         "created_at" => message.created_at,
         "updated_at" => message.updated_at,
-        "rescended" => false,
-        :call_count => 1 }
+        "rescinded" => false,
+        "call_count" => 1 }
     end
   end
 end

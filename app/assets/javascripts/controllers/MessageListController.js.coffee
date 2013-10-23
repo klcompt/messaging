@@ -11,9 +11,9 @@ messageListCtrlFunction = ($scope, MessageList) ->
       $scope.messageBody = ""
       $scope.messages.push(message)
 
-  $scope.rescendMessage = (message) ->
-    @messageService.rescend message.id, ->
-      message.rescended = true
+  $scope.rescindMessage = (message) ->
+    @messageService.rescind message.id, ->
+      message.rescinded = true
 
 # address minification issue
 messageListCtrlFunction.$inject = ['$scope', 'MessageList']

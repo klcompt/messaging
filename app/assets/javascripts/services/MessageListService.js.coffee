@@ -11,5 +11,5 @@ angular.module('messagesApp').factory 'MessageList', ($resource, $http) ->
     create: (attrs, successHandler) ->
       new @service(message: attrs).$save ((message) -> successHandler(message)) #, @errorHandler      
 
-    rescend: (messageId, successHandler) ->
-      new @service({ message: { rescended: true }}).$update {id: messageId}, (-> successHandler())
+    rescind: (messageId, successHandler) ->
+      new @service({ message: { rescinded: true }}).$update {id: messageId}, (-> successHandler())

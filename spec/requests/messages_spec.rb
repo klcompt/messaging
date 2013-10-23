@@ -32,7 +32,7 @@ describe 'Messages' do
   describe 'GET #index' do
 
     context 'messages exist' do
-      let!(:message1) { FactoryGirl.create(:message, title: 'Message 1', body: 'msg body 1', rescended: true) }
+      let!(:message1) { FactoryGirl.create(:message, title: 'Message 1', body: 'msg body 1', rescinded: true) }
       let!(:message2) { FactoryGirl.create(:message, title: 'Message 2', body: 'msg body 2') }
       let!(:message3) { FactoryGirl.create(:message, title: 'Message 3', body: 'msg body 3') }
 
@@ -51,15 +51,15 @@ describe 'Messages' do
         parsed_json_response.size.should == 3
         parsed_json_response[0]['title'].should == message1.title
         parsed_json_response[0]['body'].should == message1.body
-        parsed_json_response[0]['rescended'].should == message1.rescended
+        parsed_json_response[0]['rescinded'].should == message1.rescinded
         parsed_json_response[0]['call_count'].should == 0
         parsed_json_response[1]['title'].should == message2.title
         parsed_json_response[1]['body'].should == message2.body
-        parsed_json_response[1]['rescended'].should == message2.rescended
+        parsed_json_response[1]['rescinded'].should == message2.rescinded
         parsed_json_response[1]['call_count'].should == 2
         parsed_json_response[2]['title'].should == message3.title
         parsed_json_response[2]['body'].should == message3.body
-        parsed_json_response[2]['rescended'].should == message3.rescended
+        parsed_json_response[2]['rescinded'].should == message3.rescinded
         parsed_json_response[2]['call_count'].should == 0
       end
     end
@@ -90,9 +90,9 @@ describe 'Messages' do
     end
   end
 
-  describe 'PUT #update - rescend message' do
+  describe 'PUT #update - rescind message' do
     let!(:message) { FactoryGirl.create(:message) }
-    let(:params) { { message: { rescended: true } } }
+    let(:params) { { message: { rescinded: true } } }
 
     context 'message exists' do
       before { put message_path(message, format: :json), params }
@@ -101,14 +101,14 @@ describe 'Messages' do
         response.status.should == 204
       end
 
-      it 'updates the message rescended flag' do
+      it 'updates the message rescinded flag' do
         message_after_update = Message.find(message.id)
-        message_after_update.should be_rescended
+        message_after_update.should be_rescinded
       end
     end
 
     context 'validation errors' do
-      let(:params) { { message: { title: nil, rescended: true } } }
+      let(:params) { { message: { title: nil, rescinded: true } } }
       before { put message_path(message, format: :json), params }
 
       it 'responds with 422' do
@@ -143,7 +143,7 @@ describe 'Messages' do
     it 'returns json for message and its analytics' do
       parsed_json_response['title'].should == message.title
       parsed_json_response['body'].should == message.body
-      parsed_json_response['rescended'].should == message.rescended
+      parsed_json_response['rescinded'].should == message.rescinded
       parsed_json_response['call_count'].should == 1 
     end
   end

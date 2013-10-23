@@ -9,7 +9,7 @@
           %th Title
           %th Body
           %th Call Count
-          %th Rescended?
+          %th Rescinded?
           %th
       %tbody.table-striped
         %tr(ng-repeat='message in messages' title='To Play: call twilio number and press {{ message.id }}# when prompted.')
@@ -22,10 +22,10 @@
           %td
             {{ message.call_count }}
           %td
-            {{ "" + message.rescended | uppercase }}
+            {{ "" + message.rescinded | uppercase }}
           %td
-            %button.btn(ng-if="!message.rescended" ng-click="rescendMessage(message)")
-              rescend
+            %button.btn(ng-if="!message.rescinded" ng-click="rescindMessage(message)")
+              rescind
 
     %br
     %form.form-horizontal#new_message(ng-submit="createMessage(messageTitle, messageBody)")
