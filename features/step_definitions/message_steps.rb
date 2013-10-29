@@ -24,15 +24,15 @@ When(/^I rescind the last message$/) do
 end
 
 Then(/^I should see the message is rescinded$/) do
-  last_row = page.all('table.messages tbody tr').last
-  last_row.should have_content "TRUE"
+  page.find('table.messages tbody tr:nth-child(3)').should have_content "TRUE"
 end
 
 Then(/^I should see the new message as the last message in the list$/) do
-  last_row = page.all('table.messages tbody tr').last
-  last_row.should have_content @new_message_title
-  last_row.should have_content @new_message_body
-  last_row.should have_content "FALSE"
+  page.find('table.messages tbody tr:nth-child(4)') do |last_row|
+    last_row.should have_content @new_message_title
+    last_row.should have_content @new_message_body
+    last_row.should have_content "FALSE"
+  end
 end
 
 Then(/^I should see the messages$/) do
